@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="View, search and download Microsoft's Fluent UI icons">
+    <title>Fluent Icons Viewer</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      window.version = "1.0.0";
+      (async () => {
+        const result = await navigator.serviceWorker.register('./service-worker.js');
+        if (navigator.onLine) await result.update();
+      })();
+      fetch("./updatecode", { cache: "no-store" }).then((res) => res.text().then((text) => { if (text.replace("\n", "") !== window.version) if (confirm(`There's a new version of Fluent Icons Viewer. Do you want to update? [${window.version} --> ${text.replace("\n", "")}]`)) { caches.delete("fluentuiiconviewer-cache"); location.reload(true); } }).catch((e) => { console.error(e) })).catch((e) => console.error(e)); // Check if the application code is the same as the current application version and, if not, ask the user to update
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

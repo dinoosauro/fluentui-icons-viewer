@@ -1,0 +1,204 @@
+:root {
+  --background: #151515;
+  --text: #fafafa;
+  --card: #313131;
+  --secondcard: #515151;
+  --accent: #656957;
+  --img-filter: invert(1);
+  --font: "Work Sans", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --icon-size: 24px;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: var(--font);
+  padding: 10px;
+}
+
+.card {
+  padding: 10px;
+  background-color: var(--card);
+  border-radius: 12px;
+}
+
+input::placeholder {
+  color: var(--text);
+  opacity: 0.7;
+}
+
+button:not(.emptyBtn),
+input:not([type=checkbox]),
+select {
+  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: var(--accent);
+  color: var(--text);
+  border: 1px solid var(--text);
+  font-family: var(--font);
+}
+
+table button:not(.emptyBtn) {
+  width: fit-content;
+}
+
+table img {
+  filter: var(--img-filter);
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+table {
+  min-width: 100%;
+  width: auto;
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+table tr>* {
+  padding: 10px;
+  border-radius: 8px;
+}
+
+table tr {
+  background-color: var(--secondcard);
+  border-radius: 8px;
+}
+
+table thead tr,
+table thead tr div {
+  background-color: var(--accent);
+  color: var(--text);
+}
+
+td {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.hcenter {
+  align-items: center;
+}
+
+.gap {
+  gap: 10px;
+}
+
+input[type=checkbox] {
+  position: relative;
+  width: 60px;
+  min-width: 60px;
+  height: 20px;
+  min-height: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--text);
+  appearance: none;
+  background-color: var(--secondcard);
+  transition: background-color 0.2s ease-in-out;
+}
+
+input[type=checkbox]:checked {
+  background-color: var(--accent);
+}
+
+input[type=checkbox]::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  width: 14px;
+  height: 14px;
+  left: 2px;
+  border-radius: 50%;
+  background-color: var(--text);
+  transition: 0.2s ease-in-out;
+}
+
+input[type=checkbox]:checked::before {
+  left: 42px;
+}
+
+.spinner {
+  width: min(15vw, 15vh);
+  height: min(15vw, 15vh);
+  background-color: var(--accent);
+  position: fixed;
+  left: calc(50vw - (min(15vw, 15vh) / 2));
+  top: calc(50vh - (min(15vw, 15vh) / 2));
+  animation: spinnerAnimation 1s infinite ease-in-out;
+  border-radius: 50%;
+  border: 1px solid var(--text);
+}
+
+@keyframes spinnerAnimation {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+button:not(.emptyBtn) {
+  transition: 0.2s ease-in-out;
+}
+
+button:not(.emptyBtn):hover {
+  filter: brightness(130%);
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+button:not(.emptyBtn):active {
+  filter: brightness(150%);
+  transform: scale(0.99);
+}
+
+button.emptyBtn {
+  appearance: none;
+  background-color: transparent;
+  color: var(--text);
+  font-family: var(--font);
+  border: 0;
+  font-size: 16px;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.dialog {
+  backdrop-filter: blur(8px) brightness(40%);
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+.dialog>div {
+  width: calc(70vw - 15px);
+  height: calc(70vh - 15px);
+  left: calc(15vw - 15px);
+  top: calc(15vh - 15px);
+  padding: 15px;
+  border-radius: 12px;
+  background-color: var(--card);
+  position: fixed;
+  overflow: auto;
+}
