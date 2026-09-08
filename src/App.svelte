@@ -295,7 +295,12 @@
     <input placeholder="Search an icon" type="text" bind:value={filterText} oninput={() => {
       let tempText = filterText;
       setTimeout(() => {
-        if (tempText === filterText) availableIcons = fetchedIcons.filter(i => i.name.toLowerCase().indexOf(filterText.toLowerCase().trim()) !== -1);
+        if (tempText === filterText) availableIcons = fetchedIcons.filter(i => i.name.toLowerCase().indexOf(filterText.toLowerCase().trim()) !== -1).sort((a, b) => {
+          let [source, dest, filter] = [a.name.toLowerCase(), b.name.toLowerCase(), filterText.toLowerCase()];
+          if (source.startsWith(filter) && !dest.startsWith(filter)) return -1;
+          if (!source.startsWith(filter) && dest.startsWith(filter)) return 1;
+          return source.localeCompare(dest);
+        });
       }, 150)
       
     }}><br><br>
